@@ -24,7 +24,7 @@ MagicalContainer::PrimeIterator& MagicalContainer::PrimeIterator::operator++(){
     ++index;
     return *this;
 }
-int MagicalContainer::PrimeIterator:: operator*(){
+int MagicalContainer::PrimeIterator:: operator*()const{
     return *container.primePointers[index];
 }
 

@@ -26,7 +26,7 @@ MagicalContainer::AscendingIterator& MagicalContainer::AscendingIterator::operat
     ++index;
     return *this;
 }
-int MagicalContainer::AscendingIterator:: operator*(){
+int MagicalContainer::AscendingIterator:: operator*()const{
     return container.magicContainer[index];
 }
 

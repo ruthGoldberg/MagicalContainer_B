@@ -92,21 +92,23 @@ void MagicalContainer :: resize(){
 }
 
 void MagicalContainer::removeElement(int element){
+    
     int index = -1;
     int crossIndex = -1;
     int primeIndex = -1;
     for (int i = 0; i < ContainerSize; i++) {
         if (magicContainer[i] == element) {
             index = i;
-            //break;
         }
         if(*crossPointers[i] == element)
             crossIndex = i;
   
     }
-    for (int i = 0; i < primeSize; i++) {
-        if(*primePointers[i] == element)
-            primeIndex = i;  
+    if(isPrime(element)){
+        for (int i = 0; i < primeSize; i++) {
+            if(*primePointers[i] == element)
+                primeIndex = i;  
+        }
     }
 
     if (index == -1) {
@@ -114,6 +116,7 @@ void MagicalContainer::removeElement(int element){
     }
     if(primeIndex != -1)
         primeSize--;
+
     if(index == ContainerSize-1){
         magicContainer[index] = 0;
     }
@@ -127,19 +130,15 @@ void MagicalContainer::removeElement(int element){
     for (int i = index ; i < ContainerSize - 1; i++) {
         magicContainer[i] = magicContainer[i + 1];
     }
-    for (int i = crossIndex ; i < ContainerSize - 1; i++) {
-        crossPointers[i] = crossPointers[i + 1];
-    }
-    for (int i = primeIndex ; i < primeSize - 1; i++) {
-        primePointers[i] = primePointers[i + 1];
-    }
 
     ContainerSize--;
+    addPointerCross();
+    addPointerPrime();
+
 }
 
 size_t MagicalContainer:: size()const{
     return ContainerSize;
-    int c_size;
 }
 
 void MagicalContainer::addPointerCross(){
@@ -156,8 +155,11 @@ void MagicalContainer:: addPointerPrime(){
     for(size_t i = 0 , j = 0; i < ContainerSize ; i++){
         if(isPrime(magicContainer[i])){
             primePointers[j++] = &magicContainer[i];
+            //cout<<*primePointers[j-1]<<",";
         }
+
     }
+    //cout<<endl;
     
 }
 
@@ -190,7 +192,7 @@ bool MagicalContainer::Iterator::operator<(const Iterator &other)const{
     return index < other.getIndex();
 }
 bool MagicalContainer::Iterator::operator==(const Iterator &other)const{
-    return index == other.getIndex();
+    return !(index > other.getIndex() || index < other.getIndex());
 }
 bool MagicalContainer::Iterator::operator!=(const Iterator &other)const{
     return !(*this == other);

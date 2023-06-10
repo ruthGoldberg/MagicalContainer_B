@@ -41,7 +41,7 @@ namespace ariel{
                 virtual ~Iterator() = default;
                 Iterator& operator=(const Iterator& other);
                 virtual Iterator &operator++() = 0;
-                virtual int operator*() = 0;
+                virtual int operator*()const  = 0;
                 bool operator!=(const Iterator &other)const;
                 bool operator==(const Iterator &other)const;
                 bool operator>(const Iterator &other)const;
@@ -60,7 +60,7 @@ namespace ariel{
                 AscendingIterator begin();
                 AscendingIterator end();
                 AscendingIterator &operator++()override;
-                int operator*()override;
+                int operator*()const override;
                 
                 
         
@@ -76,7 +76,7 @@ namespace ariel{
             SideCrossIterator begin();
             SideCrossIterator end();
             SideCrossIterator &operator++()override;
-            int operator*()override;
+            int operator*()const override;
             
             
         };
@@ -91,7 +91,7 @@ namespace ariel{
             PrimeIterator begin();
             PrimeIterator end();
             PrimeIterator &operator++()override;
-            int operator*()override;
+            int operator*()const override;
             
             
         };

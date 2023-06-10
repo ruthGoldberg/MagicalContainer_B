@@ -23,7 +23,7 @@ MagicalContainer::SideCrossIterator& MagicalContainer::SideCrossIterator::operat
     ++index;
     return *this;
 }
-int MagicalContainer::SideCrossIterator:: operator*(){
+int MagicalContainer::SideCrossIterator:: operator*()const{
     return *container.crossPointers[index];
 }
 
